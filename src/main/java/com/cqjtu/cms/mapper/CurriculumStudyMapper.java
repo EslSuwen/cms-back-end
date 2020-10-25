@@ -9,4 +9,8 @@ import com.cqjtu.cms.entity.CurriculumStudy;
  * @author suwen
  * @since 2020-10-25
  */
-public interface CurriculumStudyMapper extends BaseMapper<CurriculumStudy> {}
+public interface CurriculumStudyMapper extends BaseMapper<CurriculumStudy> {
+
+
+    String getSumCredit(String sno, String courseType, String courseAttribute);
+}

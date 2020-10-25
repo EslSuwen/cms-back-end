@@ -1,6 +1,7 @@
 package com.cqjtu.cms.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -26,11 +27,18 @@ public class Gtv implements Serializable {
   @TableId(type = IdType.AUTO)
   private Integer id;
 
-  @ApiModelProperty(value = "课程类型名")
+  @ApiModelProperty(value = "课程类型")
   private String courseType;
 
+  @ApiModelProperty(value = "课程属性")
+  private String courseAttribute;
+
   @ApiModelProperty(value = "课程类型所需学分")
-  private Integer limitCredit;
+  private String limitCredit;
 
   private Integer majorId;
+
+  @ApiModelProperty(value = "已修读学分")
+  @TableField(exist = false)
+  private String finishCredit;
 }

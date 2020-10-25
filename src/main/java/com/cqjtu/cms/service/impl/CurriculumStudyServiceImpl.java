@@ -14,4 +14,10 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class CurriculumStudyServiceImpl extends ServiceImpl<CurriculumStudyMapper, CurriculumStudy>
-    implements CurriculumStudyService {}
+    implements CurriculumStudyService {
+
+  @Override
+  public String getSumCredit(String sno, String courseType, String courseAttribute) {
+    return baseMapper.getSumCredit(sno, courseType, courseAttribute);
+  }
+}

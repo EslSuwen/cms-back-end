@@ -1,5 +1,6 @@
 package com.cqjtu.cms.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.cqjtu.cms.constant.ResultCode;
 import com.cqjtu.cms.dto.Result;
 import com.cqjtu.cms.entity.Gtv;
@@ -39,6 +40,13 @@ public class GtvController {
   @ApiOperation("通过编号获取系学分管理信息")
   public ResponseEntity<Result> getGtvById(@ApiParam("系学分管理编号") @PathVariable Integer id) {
     return Result.success(gtvService.getById(id), ResultCode.SUCCESS_GET_DATA);
+  }
+
+  @GetMapping("/getByMajorId/{id}")
+  @ApiOperation("通过专业编号获取系学分管理信息")
+  public ResponseEntity<Result> getGtvByMajorId(@ApiParam("专业编号") @PathVariable Integer id) {
+    return Result.success(
+        gtvService.list(new QueryWrapper<Gtv>().eq("major_id", id)), ResultCode.SUCCESS_GET_DATA);
   }
 
   @PostMapping("/add")
