@@ -1,0 +1,77 @@
+plugins {
+    id 'org.springframework.boot' version '2.3.3.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.10.RELEASE'
+    id 'java'
+}
+
+group = 'com.cqjtu'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+repositories {
+    maven { url "http://maven.aliyun.com/nexus/content/groups/public/" }
+    maven { url "https://repo.spring.io/snapshot" }
+    maven { url "https://repo.spring.io/milestone" }
+}
+
+dependencies {
+
+    implementation 'dom4j:dom4j:1.6.1'
+
+    implementation 'com.thoughtworks.xstream:xstream:1.4.13'
+
+    implementation 'org.apache.commons:commons-lang3:3.11'
+
+    implementation 'com.alibaba:fastjson:1.2.73'
+
+    implementation 'junit:junit:4.13'
+
+    implementation 'commons-codec:commons-codec:1.15'
+
+    implementation 'cn.dev33:sa-token:1.4.0'
+
+    implementation 'com.github.xiaoymin:knife4j-spring-boot-starter:2.0.3'
+
+    implementation 'cn.hutool:hutool-all:5.3.10'
+
+    implementation 'org.freemarker:freemarker:2.3.30'
+
+    implementation 'com.baomidou:mybatis-plus-generator:3.4.0'
+
+    implementation 'com.baomidou:mybatis-plus-boot-starter:3.4.0'
+
+    implementation 'org.springframework.boot:spring-boot-starter-log4j2'
+
+    implementation 'org.springframework.boot:spring-boot-devtools'
+
+    implementation 'org.springframework.boot:spring-boot-starter-aop'
+
+    implementation 'com.alibaba:druid-spring-boot-starter:1.1.23'
+
+    implementation 'mysql:mysql-connector-java'
+
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+
+    implementation 'org.springframework.boot:spring-boot-configuration-processor'
+
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+
+    implementation 'org.springframework.boot:spring-boot-starter'
+
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+    testImplementation('org.springframework.boot:spring-boot-starter-test') {
+        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+    }
+
+    configurations {
+        providedRuntime
+        // remove default logger
+        all*.exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
+    }
+}
+
