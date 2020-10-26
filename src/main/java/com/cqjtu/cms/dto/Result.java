@@ -37,6 +37,50 @@ public class Result {
         HttpStatus.OK);
   }
 
+  public static ResponseEntity<Result> successGet(Object data) {
+    return new ResponseEntity<>(
+        Result.builder()
+            .success(true)
+            .code(ResultCode.SUCCESS_GET_DATA.getCode())
+            .message(ResultCode.SUCCESS_GET_DATA.getMessage())
+            .data(data)
+            .build(),
+        HttpStatus.OK);
+  }
+
+  public static ResponseEntity<Result> successAdd(Object... data) {
+    return new ResponseEntity<>(
+        Result.builder()
+            .success(true)
+            .code(ResultCode.SUCCESS_ADD_DATA.getCode())
+            .message(ResultCode.SUCCESS_ADD_DATA.getMessage())
+            .data(data)
+            .build(),
+        HttpStatus.OK);
+  }
+
+  public static ResponseEntity<Result> successUpdate(Object... data) {
+    return new ResponseEntity<>(
+        Result.builder()
+            .success(true)
+            .code(ResultCode.SUCCESS_UPDATE_DATA.getCode())
+            .message(ResultCode.SUCCESS_ADD_DATA.getMessage())
+            .data(data)
+            .build(),
+        HttpStatus.OK);
+  }
+
+  public static ResponseEntity<Result> successDelete(Object... data) {
+    return new ResponseEntity<>(
+        Result.builder()
+            .success(true)
+            .code(ResultCode.SUCCESS_DELETE_DATA.getCode())
+            .message(ResultCode.SUCCESS_DELETE_DATA.getMessage())
+            .data(data)
+            .build(),
+        HttpStatus.OK);
+  }
+
   public static ResponseEntity<Result> success(Object data) {
     return new ResponseEntity<>(
         Result.builder()
@@ -69,10 +113,22 @@ public class Result {
         HttpStatus.OK);
   }
 
+  public static ResponseEntity<Result> success(
+      Object data, ResultCode resultCode, HttpStatus httpStatus) {
+    return new ResponseEntity<>(
+        Result.builder()
+            .success(true)
+            .code(resultCode.getCode())
+            .message(resultCode.getMessage())
+            .data(data)
+            .build(),
+        httpStatus);
+  }
+
   public static ResponseEntity<Result> failure(ResultCode resultCode) {
     return new ResponseEntity<>(
         Result.builder().code(resultCode.getCode()).message(resultCode.getMessage()).build(),
-        HttpStatus.OK);
+        HttpStatus.BAD_REQUEST);
   }
 
   public static ResponseEntity<Result> failure(Object data, ResultCode resultCode) {
@@ -82,6 +138,17 @@ public class Result {
             .message(resultCode.getMessage())
             .data(data)
             .build(),
-        HttpStatus.OK);
+        HttpStatus.BAD_REQUEST);
+  }
+
+  public static ResponseEntity<Result> failure(
+      Object data, ResultCode resultCode, HttpStatus httpStatus) {
+    return new ResponseEntity<>(
+        Result.builder()
+            .code(resultCode.getCode())
+            .message(resultCode.getMessage())
+            .data(data)
+            .build(),
+        httpStatus);
   }
 }
