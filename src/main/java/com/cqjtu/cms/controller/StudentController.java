@@ -1,8 +1,8 @@
 package com.cqjtu.cms.controller;
 
 import com.cqjtu.cms.constant.ResultCode;
-import com.cqjtu.cms.dto.Result;
-import com.cqjtu.cms.entity.Student;
+import com.cqjtu.cms.model.dto.Result;
+import com.cqjtu.cms.model.entity.Student;
 import com.cqjtu.cms.service.StudentService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

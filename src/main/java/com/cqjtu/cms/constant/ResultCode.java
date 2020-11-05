@@ -26,7 +26,7 @@ public enum ResultCode {
   USER_ERROR(2999, "客户端错误"),
 
   /** 服务器错误消息:3001-3999 */
-  REDIS_TIME_OUT(3001,"Redis缓存连接超时"),
+  REDIS_TIME_OUT(3001, "Redis缓存连接超时"),
   SERVER_ERROR(3999, "服务端错误");
 
   private final Integer code;

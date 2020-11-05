@@ -1,7 +1,7 @@
 package com.cqjtu.cms.exception;
 
 import com.cqjtu.cms.constant.ResultCode;
-import com.cqjtu.cms.dto.Result;
+import com.cqjtu.cms.model.dto.Result;
 import io.lettuce.core.RedisCommandTimeoutException;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
@@ -73,8 +73,7 @@ public class RestExceptionHandler {
 
   @ExceptionHandler(value = RedisCommandTimeoutException.class)
   @ResponseBody
-  public ResponseEntity<Result> handleRedisCommandTimeoutException(
-      RedisCommandTimeoutException e) {
+  public ResponseEntity<Result> handleRedisCommandTimeoutException(RedisCommandTimeoutException e) {
     log.error(e.getMessage(), e);
     return new ResponseEntity<>(
         Result.builder()

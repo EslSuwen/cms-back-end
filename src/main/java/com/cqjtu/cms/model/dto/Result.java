@@ -1,4 +1,4 @@
-package com.cqjtu.cms.dto;
+package com.cqjtu.cms.model.dto;
 
 import com.cqjtu.cms.constant.ResultCode;
 import lombok.Builder;

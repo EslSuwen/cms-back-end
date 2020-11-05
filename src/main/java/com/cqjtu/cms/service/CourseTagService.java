@@ -1,12 +1,12 @@
 package com.cqjtu.cms.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.cqjtu.cms.model.entity.Major;
+import com.cqjtu.cms.model.entity.CourseTag;
 
 /**
  * 服务类
  *
  * @author suwen
- * @since 2020-10-25
+ * @since 2020-11-05
  */
-public interface MajorService extends IService<Major> {}
+public interface CourseTagService extends IService<CourseTag> {}
