@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @Api(tags = "学生管理-前端控制器")
 @RestController
-@RequestMapping("/student")
+@RequestMapping("/cms/student")
 public class StudentController {
 
   private final StudentService studentService;

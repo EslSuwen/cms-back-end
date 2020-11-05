@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.cqjtu.cms.model.entity.CourseTag;
 
 /**
- * Mapper 接口
+ * 课程平台关联课程 Mapper 接口
  *
  * @author suwen
  * @since 2020-11-05

@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @Api(tags = "专业-前端控制器")
 @RestController
-@RequestMapping("/major")
+@RequestMapping("/cms/major")
 public class MajorController {
 
   private final MajorService majorService;

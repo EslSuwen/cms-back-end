@@ -7,7 +7,7 @@ import com.cqjtu.cms.service.CourseTagService;
 import org.springframework.stereotype.Service;
 
 /**
- * 服务实现类
+ * 课程平台关联课程 服务实现类
  *
  * @author suwen
  * @since 2020-11-05

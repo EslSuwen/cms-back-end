@@ -7,7 +7,7 @@ import com.cqjtu.cms.service.GradeService;
 import org.springframework.stereotype.Service;
 
 /**
- * 学生课程信息修读表 服务实现类
+ * 修读课程信息 服务实现类
  *
  * @author suwen
  * @since 2020-11-05
