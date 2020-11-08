@@ -1,5 +1,6 @@
 package com.cqjtu.cms.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.cqjtu.cms.constant.ResultCode;
 import com.cqjtu.cms.model.dto.Result;
 import com.cqjtu.cms.model.entity.CourseTag;
@@ -37,26 +38,47 @@ public class CourseTagController {
 
   @GetMapping("/getById/{id}")
   @ApiOperation("通过编号获取关联课程信息")
-  public ResponseEntity<Result> getCourseTagById(@ApiParam("关联课程编号") @PathVariable String id) {
+  public ResponseEntity<Result> getCourseTagById(
+      @ApiParam(value = "关联课程编号", required = true) @PathVariable String id) {
     return Result.success(courseTagService.getById(id), ResultCode.SUCCESS_GET_DATA);
+  }
+
+  @GetMapping("/getByTagId/{id}")
+  @ApiOperation("通过编号获取关联课程信息")
+  public ResponseEntity<Result> getCourseTagByTagId(
+      @ApiParam(value = "课程平台关系编号", required = true) @PathVariable String id) {
+    return Result.success(
+        courseTagService.list(new QueryWrapper<CourseTag>().eq("tag_id", id)),
+        ResultCode.SUCCESS_GET_DATA);
+  }
+
+  @GetMapping("/getByTagIdAndTerm")
+  @ApiOperation("通过课程平台编号学期获取关联课程信息")
+  public ResponseEntity<Result> getByTagIdAndTerm(
+      @ApiParam(value = "课程平台编号", required = true) @RequestParam Integer id,
+      @ApiParam(value = "学期") @RequestParam(required = false) String term) {
+    return Result.success(
+        courseTagService.getByTagIdAndTerm(id, term), ResultCode.SUCCESS_GET_DATA);
   }
 
   @PostMapping("/add")
   @ApiOperation("增加关联课程信息")
-  public ResponseEntity<Result> addCourseTag(@ApiParam("关联课程信息") @RequestBody CourseTag courseTag) {
+  public ResponseEntity<Result> addCourseTag(
+      @ApiParam(value = "关联课程信息", required = true) @RequestBody CourseTag courseTag) {
     return Result.success(courseTagService.save(courseTag), ResultCode.SUCCESS_ADD_DATA);
   }
 
   @PutMapping("/update")
   @ApiOperation("修改关联课程信息")
   public ResponseEntity<Result> updateCourseTag(
-      @ApiParam("关联课程信息") @RequestBody CourseTag courseTag) {
+      @ApiParam(value = "关联课程信息", required = true) @RequestBody CourseTag courseTag) {
     return Result.success(courseTagService.updateById(courseTag), ResultCode.SUCCESS_UPDATE_DATA);
   }
 
   @DeleteMapping("/removeById/{id}")
   @ApiOperation("通过编号删除关联课程信息")
-  public ResponseEntity<Result> removeCourseTagById(@ApiParam("关联课程编号") @PathVariable String id) {
+  public ResponseEntity<Result> removeCourseTagById(
+      @ApiParam(value = "关联课程编号", required = true) @PathVariable String id) {
     return Result.success(courseTagService.removeById(id), ResultCode.SUCCESS_DELETE_DATA);
   }
 }

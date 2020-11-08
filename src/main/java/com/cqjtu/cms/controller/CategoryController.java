@@ -37,25 +37,38 @@ public class CategoryController {
 
   @GetMapping("/getById/{id}")
   @ApiOperation("通过编号获取课程类别信息")
-  public ResponseEntity<Result> getCategoryById(@ApiParam("课程类别编号") @PathVariable String id) {
+  public ResponseEntity<Result> getCategoryById(
+      @ApiParam(value = "课程类别编号", required = true) @PathVariable String id) {
     return Result.success(categoryService.getById(id), ResultCode.SUCCESS_GET_DATA);
+  }
+
+  @GetMapping("/getByMajorIdAndGrade")
+  @ApiOperation("通过专业编号年级获取课程类别信息")
+  public ResponseEntity<Result> getCategoryByMajorIdAndGrade(
+      @ApiParam(value = "专业编号", required = true) @RequestParam Integer majorId,
+      @ApiParam(value = "年级", required = true) @RequestParam Integer grade) {
+    return Result.success(
+        categoryService.getByMajorIdAndGrade(majorId, grade), ResultCode.SUCCESS_GET_DATA);
   }
 
   @PostMapping("/add")
   @ApiOperation("增加课程类别信息")
-  public ResponseEntity<Result> addCategory(@ApiParam("课程类别信息") @RequestBody Category category) {
+  public ResponseEntity<Result> addCategory(
+      @ApiParam(value = "课程类别信息", required = true) @RequestBody Category category) {
     return Result.success(categoryService.save(category), ResultCode.SUCCESS_ADD_DATA);
   }
 
   @PutMapping("/update")
   @ApiOperation("修改课程类别信息")
-  public ResponseEntity<Result> updateCategory(@ApiParam("课程类别信息") @RequestBody Category category) {
+  public ResponseEntity<Result> updateCategory(
+      @ApiParam(value = "课程类别信息", required = true) @RequestBody Category category) {
     return Result.success(categoryService.updateById(category), ResultCode.SUCCESS_UPDATE_DATA);
   }
 
   @DeleteMapping("/removeById/{id}")
   @ApiOperation("通过编号删除课程类别信息")
-  public ResponseEntity<Result> removeCategoryById(@ApiParam("课程类别编号") @PathVariable String id) {
+  public ResponseEntity<Result> removeCategoryById(
+      @ApiParam(value = "课程类别编号", required = true) @PathVariable String id) {
     return Result.success(categoryService.removeById(id), ResultCode.SUCCESS_DELETE_DATA);
   }
 }

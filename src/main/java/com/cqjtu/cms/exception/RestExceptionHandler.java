@@ -58,19 +58,6 @@ public class RestExceptionHandler {
         HttpStatus.BAD_REQUEST);
   }
 
-  @ExceptionHandler(value = CompareException.class)
-  @ResponseBody
-  public ResponseEntity<Result> handleCompareException(CompareException e) {
-    log.error(e.getMessage(), e);
-    return new ResponseEntity<>(
-        Result.builder()
-            .code(ResultCode.SERVER_ERROR.getCode())
-            .message(e.getMessage())
-            .success(false)
-            .build(),
-        HttpStatus.BAD_REQUEST);
-  }
-
   @ExceptionHandler(value = RedisCommandTimeoutException.class)
   @ResponseBody
   public ResponseEntity<Result> handleRedisCommandTimeoutException(RedisCommandTimeoutException e) {

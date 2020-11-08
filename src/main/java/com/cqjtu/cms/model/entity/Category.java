@@ -31,4 +31,7 @@ public class Category implements Serializable {
 
   @ApiModelProperty(value = "专业编号")
   private Integer majorId;
+
+  @ApiModelProperty(value = "专业年级")
+  private Integer grade;
 }

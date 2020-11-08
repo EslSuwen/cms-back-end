@@ -1,36 +1,44 @@
-package com.cqjtu.cms.model.entity;
+package com.cqjtu.cms.model.dto;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 import java.io.Serializable;
 
 /**
- * 平台关联课程
+ * CourseTagDto
  *
  * @author suwen
- * @since 2020-11-05
+ * @version 1.0
+ * @date 2020/11/8 8:46
  */
 @Data
-@EqualsAndHashCode(callSuper = false)
-@ApiModel(value = "CourseTag对象", description = "平台关联课程")
-public class CourseTag implements Serializable {
+@ApiModel(value = "平台关联课程dto", description = "CourseTagDto 传输对象")
+public class CourseTagDto implements Serializable {
 
   private static final long serialVersionUID = 1L;
 
   @ApiModelProperty(value = "平台关联课程编号")
-  @TableId(type = IdType.AUTO)
-  private Integer id;
+  private Integer courseTagId;
 
   @ApiModelProperty(value = "课程编号")
   private String courseId;
 
   @ApiModelProperty(value = "课程平台编号")
   private Integer tagId;
+
+  @ApiModelProperty(value = "课程名称")
+  private String courseName;
+
+  @ApiModelProperty(value = "课程平台名称")
+  private String tagName;
+
+  @ApiModelProperty(value = "课程学分")
+  private String credit;
+
+  @ApiModelProperty(value = "开课学期")
+  private String term;
 
   @ApiModelProperty(value = "是否为限选课程(0:false;1:true)")
   private String required;
