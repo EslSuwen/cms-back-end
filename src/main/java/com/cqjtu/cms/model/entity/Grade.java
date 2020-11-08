@@ -27,7 +27,7 @@ public class Grade implements Serializable {
   private Integer id;
 
   @ApiModelProperty(value = "学生学号")
-  private Long sno;
+  private String sno;
 
   @ApiModelProperty(value = "课程编号")
   private String courseId;

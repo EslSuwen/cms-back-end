@@ -37,25 +37,29 @@ public class MajorController {
 
   @GetMapping("/getById/{id}")
   @ApiOperation("通过编号获取专业信息")
-  public ResponseEntity<Result> getMajorById(@ApiParam("专业编号") @PathVariable Integer id) {
+  public ResponseEntity<Result> getMajorById(
+      @ApiParam(value = "专业编号", required = true) @PathVariable Integer id) {
     return Result.success(majorService.getById(id), ResultCode.SUCCESS_GET_DATA);
   }
 
   @PostMapping("/add")
   @ApiOperation("增加专业信息")
-  public ResponseEntity<Result> addMajor(@ApiParam("专业信息") @RequestBody Major major) {
+  public ResponseEntity<Result> addMajor(
+      @ApiParam(value = "专业信息", required = true) @RequestBody Major major) {
     return Result.success(majorService.save(major), ResultCode.SUCCESS_ADD_DATA);
   }
 
   @PutMapping("/update")
   @ApiOperation("修改专业信息")
-  public ResponseEntity<Result> updateMajor(@ApiParam("专业信息") @RequestBody Major major) {
+  public ResponseEntity<Result> updateMajor(
+      @ApiParam(value = "专业信息", required = true) @RequestBody Major major) {
     return Result.success(majorService.updateById(major), ResultCode.SUCCESS_UPDATE_DATA);
   }
 
   @DeleteMapping("/removeById/{id}")
   @ApiOperation("通过编号删除专业信息")
-  public ResponseEntity<Result> removeMajorById(@ApiParam("专业编号") @PathVariable Integer id) {
+  public ResponseEntity<Result> removeMajorById(
+      @ApiParam(value = "专业编号", required = true) @PathVariable Integer id) {
     return Result.success(majorService.removeById(id), ResultCode.SUCCESS_DELETE_DATA);
   }
 }

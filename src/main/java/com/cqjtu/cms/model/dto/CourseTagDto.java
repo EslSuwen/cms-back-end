@@ -1,5 +1,6 @@
 package com.cqjtu.cms.model.dto;
 
+import com.cqjtu.cms.model.entity.Grade;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -45,4 +46,7 @@ public class CourseTagDto implements Serializable {
 
   @ApiModelProperty(value = "备注")
   private String ps;
+
+  @ApiModelProperty(value = "成绩")
+  private Grade grade;
 }

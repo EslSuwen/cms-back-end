@@ -37,25 +37,29 @@ public class GradeController {
 
   @GetMapping("/getById/{id}")
   @ApiOperation("通过编号获取修读信息")
-  public ResponseEntity<Result> getGradeById(@ApiParam("修读编号") @PathVariable String id) {
+  public ResponseEntity<Result> getGradeById(
+      @ApiParam(value = "修读编号", required = true) @PathVariable String id) {
     return Result.success(gradeService.getById(id), ResultCode.SUCCESS_GET_DATA);
   }
 
   @PostMapping("/add")
   @ApiOperation("增加修读信息")
-  public ResponseEntity<Result> addGrade(@ApiParam("修读信息") @RequestBody Grade grade) {
+  public ResponseEntity<Result> addGrade(
+      @ApiParam(value = "修读信息", required = true) @RequestBody Grade grade) {
     return Result.success(gradeService.save(grade), ResultCode.SUCCESS_ADD_DATA);
   }
 
   @PutMapping("/update")
   @ApiOperation("修改修读信息")
-  public ResponseEntity<Result> updateGrade(@ApiParam("修读信息") @RequestBody Grade grade) {
+  public ResponseEntity<Result> updateGrade(
+      @ApiParam(value = "修读信息", required = true) @RequestBody Grade grade) {
     return Result.success(gradeService.updateById(grade), ResultCode.SUCCESS_UPDATE_DATA);
   }
 
   @DeleteMapping("/removeById/{id}")
   @ApiOperation("通过编号删除修读信息")
-  public ResponseEntity<Result> removeGradeById(@ApiParam("修读编号") @PathVariable String id) {
+  public ResponseEntity<Result> removeGradeById(
+      @ApiParam(value = "修读编号", required = true) @PathVariable String id) {
     return Result.success(gradeService.removeById(id), ResultCode.SUCCESS_DELETE_DATA);
   }
 }

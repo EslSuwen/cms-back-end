@@ -37,25 +37,29 @@ public class StudentController {
 
   @GetMapping("/getById/{id}")
   @ApiOperation("通过编号获取学生信息")
-  public ResponseEntity<Result> getStudentById(@ApiParam("学生编号") @PathVariable String id) {
+  public ResponseEntity<Result> getStudentById(
+      @ApiParam(value = "学生编号", required = true) @PathVariable String id) {
     return Result.success(studentService.getById(id), ResultCode.SUCCESS_GET_DATA);
   }
 
   @PostMapping("/add")
   @ApiOperation("增加学生信息")
-  public ResponseEntity<Result> addStudent(@ApiParam("学生信息") @RequestBody Student student) {
+  public ResponseEntity<Result> addStudent(
+      @ApiParam(value = "学生信息", required = true) @RequestBody Student student) {
     return Result.success(studentService.save(student), ResultCode.SUCCESS_ADD_DATA);
   }
 
   @PutMapping("/update")
   @ApiOperation("修改学生信息")
-  public ResponseEntity<Result> updateStudent(@ApiParam("学生信息") @RequestBody Student student) {
+  public ResponseEntity<Result> updateStudent(
+      @ApiParam(value = "学生信息", required = true) @RequestBody Student student) {
     return Result.success(studentService.updateById(student), ResultCode.SUCCESS_UPDATE_DATA);
   }
 
   @DeleteMapping("/removeById/{id}")
   @ApiOperation("通过编号删除学生信息")
-  public ResponseEntity<Result> removeStudentById(@ApiParam("学生编号") @PathVariable String id) {
+  public ResponseEntity<Result> removeStudentById(
+      @ApiParam(value = "学生编号", required = true) @PathVariable String id) {
     return Result.success(studentService.removeById(id), ResultCode.SUCCESS_DELETE_DATA);
   }
 }

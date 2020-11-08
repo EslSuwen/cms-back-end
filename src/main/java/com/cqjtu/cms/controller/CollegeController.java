@@ -37,25 +37,29 @@ public class CollegeController {
 
   @GetMapping("/getById/{id}")
   @ApiOperation("通过编号获取学院信息")
-  public ResponseEntity<Result> getCollegeById(@ApiParam("学院编号") @PathVariable String id) {
+  public ResponseEntity<Result> getCollegeById(
+      @ApiParam(value = "学院编号", required = true) @PathVariable String id) {
     return Result.success(collegeService.getById(id), ResultCode.SUCCESS_GET_DATA);
   }
 
   @PostMapping("/add")
   @ApiOperation("增加学院信息")
-  public ResponseEntity<Result> addCollege(@ApiParam("学院信息") @RequestBody College college) {
+  public ResponseEntity<Result> addCollege(
+      @ApiParam(value = "学院信息", required = true) @RequestBody College college) {
     return Result.success(collegeService.save(college), ResultCode.SUCCESS_ADD_DATA);
   }
 
   @PutMapping("/update")
   @ApiOperation("修改学院信息")
-  public ResponseEntity<Result> updateCollege(@ApiParam("学院信息") @RequestBody College college) {
+  public ResponseEntity<Result> updateCollege(
+      @ApiParam(value = "学院信息", required = true) @RequestBody College college) {
     return Result.success(collegeService.updateById(college), ResultCode.SUCCESS_UPDATE_DATA);
   }
 
   @DeleteMapping("/removeById/{id}")
   @ApiOperation("通过编号删除学院信息")
-  public ResponseEntity<Result> removeCollegeById(@ApiParam("学院编号") @PathVariable String id) {
+  public ResponseEntity<Result> removeCollegeById(
+      @ApiParam(value = "学院编号", required = true) @PathVariable String id) {
     return Result.success(collegeService.removeById(id), ResultCode.SUCCESS_DELETE_DATA);
   }
 }

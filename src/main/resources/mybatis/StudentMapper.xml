@@ -2,4 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cqjtu.cms.mapper.StudentMapper">
 
+    <select id="getInfoBySno" resultType="com.cqjtu.cms.model.dto.StudentDto">
+        SELECT sno, grade, major_id, college_id, s.`name` studentName, m.`name` major_name, c.`name` college_name
+        FROM student s,
+             college c,
+             major m
+        WHERE major_id = m.id
+          AND m.college_id = c.id
+          AND sno = #{sno}
+    </select>
 </mapper>

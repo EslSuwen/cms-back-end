@@ -2,4 +2,48 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cqjtu.cms.mapper.GradeMapper">
 
+    <resultMap id="courseTagGradeRM" type="com.cqjtu.cms.model.dto.CourseTagDto">
+        <result column="course_tag_id" jdbcType="INTEGER" property="courseTagId"/>
+        <result column="course_id" jdbcType="INTEGER" property="courseId"/>
+        <result column="tag_id" jdbcType="INTEGER" property="tagId"/>
+        <result column="course_name" jdbcType="VARCHAR" property="courseName"/>
+        <result column="tag_name" jdbcType="VARCHAR" property="tagName"/>
+        <result column="credit" jdbcType="VARCHAR" property="credit"/>
+        <result column="term" jdbcType="VARCHAR" property="term"/>
+        <result column="required" jdbcType="VARCHAR" property="required"/>
+        <result column="ps" jdbcType="VARCHAR" property="ps"/>
+        <association property="grade" javaType="com.cqjtu.cms.model.entity.Grade">
+            <result column="grade_id" jdbcType="INTEGER" property="id"/>
+            <result column="sno" jdbcType="VARCHAR" property="sno"/>
+            <result column="course_id" jdbcType="VARCHAR" property="courseId"/>
+            <result column="result" jdbcType="VARCHAR" property="result"/>
+        </association>
+    </resultMap>
+
+    <select id="getByTagIdAndSno" resultMap="courseTagGradeRM">
+        SELECT ct.id course_tag_id,
+        ct.course_id,
+        tag_id,
+        c.`name` course_name,
+        t.`name` tag_name,
+        credit,
+        term,
+        required,
+        ps,
+        g.id grade_id,
+        sno,
+        result
+        FROM course_tag ct,
+        course c,
+        tag t,
+        grade g
+        WHERE ct.course_id = c.id
+        AND ct.tag_id = t.id
+        AND g.course_id = ct.course_id
+        AND sno = #{sno}
+        AND tag_id = #{tagId}
+        <if test="term != null and term != ''">
+            AND term=#{term}
+        </if>
+    </select>
 </mapper>
