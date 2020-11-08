@@ -32,9 +32,6 @@ public class TagDto implements Serializable {
   @ApiModelProperty(value = "专业年级")
   private Integer grade;
 
-  @ApiModelProperty(value = "课程平台编号")
-  private Integer id;
-
   @ApiModelProperty(value = "课程类型编号")
   private Integer tagId;
 

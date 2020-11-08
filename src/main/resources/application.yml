@@ -8,7 +8,7 @@ server: #配置server
 
 spring:
   profiles:
-    active: dev
+    active: dev2
   datasource:
     druid:
       driver-class-name: com.mysql.cj.jdbc.Driver       # 数据库访问配置,主数据源，默认的
@@ -85,7 +85,7 @@ spring:
   profiles: dev2
   datasource:
     druid:
-      url: jdbc:mysql://47.115.8.44:3306/cmsdb?characterEncoding=utf8
+      url: jdbc:mysql://47.115.8.44:3306/cmsDB-dev?characterEncoding=utf8
       username: root
       password: Liyu8824
 

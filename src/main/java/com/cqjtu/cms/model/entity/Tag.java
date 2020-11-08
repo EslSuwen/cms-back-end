@@ -33,8 +33,8 @@ public class Tag implements Serializable {
   private String name;
 
   @ApiModelProperty(value = "每学期建议修读学分(0:无限制)")
-  private Integer each;
+  private String each;
 
   @ApiModelProperty(value = "毕业要求修读学分")
-  private Integer limit;
+  private String limit;
 }
