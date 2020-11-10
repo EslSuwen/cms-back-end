@@ -1,6 +1,7 @@
 package com.cqjtu.cms.model.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -30,11 +31,14 @@ public class Tag implements Serializable {
   private Integer categoryId;
 
   @ApiModelProperty(value = "课程平台名称")
+  @TableField("`name`")
   private String name;
 
   @ApiModelProperty(value = "每学期建议修读学分(0:无限制)")
+  @TableField("`each`")
   private String each;
 
   @ApiModelProperty(value = "毕业要求修读学分")
+  @TableField("`limit`")
   private String limit;
 }

@@ -1,6 +1,7 @@
 package com.cqjtu.cms.model.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -27,6 +28,7 @@ public class Category implements Serializable {
   private Integer id;
 
   @ApiModelProperty(value = "课程类别名")
+  @TableField("`name`")
   private String name;
 
   @ApiModelProperty(value = "专业编号")

@@ -1,5 +1,6 @@
 package com.cqjtu.cms.model.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -24,5 +25,6 @@ public class College implements Serializable {
   private Integer id;
 
   @ApiModelProperty(value = "学院名称")
+  @TableField("`name`")
   private String name;
 }
