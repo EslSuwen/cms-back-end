@@ -19,8 +19,6 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import java.time.LocalDate;
 
-import static com.google.common.collect.Lists.newArrayList;
-
 /**
  * Swagger 配置 springfox 注解简单介绍 常用注解： @Api () 用于类； 表示标识这个类是 swagger 的资源 @ApiOperation () 用于方法； 表示一个
  * http * 请求的操作 @ApiParam () 用于方法，参数，字段说明； 表示对参数的添加元数据（说明或是否必填等） @ApiModel () 用于类
@@ -54,7 +52,7 @@ public class SwaggerConfig {
         .directModelSubstitute(LocalDate.class, String.class)
         .genericModelSubstitutes(ResponseEntity.class)
         .useDefaultResponseMessages(false)
-        .securitySchemes(newArrayList(apiKey()))
+        //        .securitySchemes(newArrayList(apiKey()))
         .enableUrlTemplating(false);
   }
 

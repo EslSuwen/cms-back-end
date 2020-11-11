@@ -8,7 +8,9 @@ server: #配置server
 
 spring:
   profiles:
-    active: dev
+    active:
+      - prod2
+      - property
   datasource:
     druid:
       driver-class-name: com.mysql.cj.jdbc.Driver       # 数据库访问配置,主数据源，默认的
@@ -42,30 +44,8 @@ spring:
 mybatis-plus:
   # xml扫描，多个目录用逗号或者分号分隔（告诉 Mapper 所对应的 XML 文件位置）
   mapper-locations: classpath:mybatis/*Mapper.xml
-
-springfox:
-  documentation:
-    swagger:
-      v2:
-        path: /api-docs
-
-security:
-  cors:
-    allowed-origins: "*"
-    allowed-methods: GET,POST,DELETE,PUT,OPTIONS
-    allowed-headers: Accept,Accept-Encoding,Accept-Language,Authorization,Connection,Content-Type,Host,Origin,Referer,User-Agent,X-Requested-With
-  jwt:
-    header: Authorization
-    secret: cmsSecret
-    expiration: 12000
-    issuer: suwen
-    authentication-path: /auth/login
-
-info:
-  app:
-    name: Credit Management Project
-    abbrName: CMS
-    version: v1.0-Alpha
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
 ---
 #开发环境配置1
@@ -90,7 +70,18 @@ spring:
       password: Liyu8824
 
 ---
-#生产环境配置
+#开发环境配置3
+
+spring:
+  profiles: dev3
+  datasource:
+    druid:
+      url: jdbc:mysql://218.194.167.125:23306/cms-dev?serverTimezone=Asia/Shanghai&characterEncoding=utf8&useUnicode=true&useSSL=false&allowPublicKeyRetrieval=true
+      username: root
+      password: kad@@@666888
+
+---
+#生产环境配置1
 
 spring:
   profiles: prod
@@ -99,3 +90,15 @@ spring:
       url: jdbc:mysql://localhost:3306/cmsdb?characterEncoding=utf8
       username: root
       password: Liyu8824
+
+---
+#生产环境配置2
+
+spring:
+  profiles: prod2
+  datasource:
+    druid:
+      url: jdbc:mysql://localhost:23306/cms-dev?serverTimezone=Asia/Shanghai&characterEncoding=utf8&useUnicode=true&useSSL=false&allowPublicKeyRetrieval=true
+      username: root
+      password: kad@@@666888
+
