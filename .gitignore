@@ -26,6 +26,7 @@ out/
 !**/src/main/**/out/
 !**/src/test/**/out/
 rebel.xml
+log
 
 ### NetBeans ###
 /nbproject/private/
