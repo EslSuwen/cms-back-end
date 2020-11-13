@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @Api(tags = "课程平台关系-前端控制器")
 @RestController
-@RequestMapping("/cms/tag")
+@RequestMapping("/tag")
 public class TagController {
 
   private TagService tagService;

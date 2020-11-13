@@ -18,6 +18,7 @@
         WHERE ct.course_id = c.id
         AND ct.tag_id = t.id
         AND ct.tag_id = #{tagId}
+        AND major_id= #{majorId}
         <if test="term != null and term != ''">
             AND term=#{term}
         </if>

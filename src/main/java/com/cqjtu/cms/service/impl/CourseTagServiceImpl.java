@@ -18,8 +18,9 @@ import java.util.List;
 @Service
 public class CourseTagServiceImpl extends ServiceImpl<CourseTagMapper, CourseTag>
     implements CourseTagService {
+
   @Override
-  public List<CourseTagDto> getByTagIdAndTerm(Integer tagId, String term) {
-    return baseMapper.getByTagIdAndTerm(tagId, term);
+  public List<CourseTagDto> getByTagAndMajor(Integer tagId, Integer majorId, String term) {
+    return baseMapper.getByTagIdAndTerm(tagId, majorId, term);
   }
 }

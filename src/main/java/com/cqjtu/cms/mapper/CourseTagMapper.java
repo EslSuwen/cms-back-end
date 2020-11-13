@@ -19,10 +19,12 @@ public interface CourseTagMapper extends BaseMapper<CourseTag> {
    * 通过tagId,term查询
    *
    * @param tagId 课程平台编号
+   * @param majorId 专业编号
    * @param term 学期
    * @return java.util.List<com.cqjtu.cms.model.dto.CourseTagDto>
    * @author suwen
    * @date 2020/11/8 9:41
    */
-  List<CourseTagDto> getByTagIdAndTerm(@Param("tagId") Integer tagId, @Param("term") String term);
+  List<CourseTagDto> getByTagIdAndTerm(
+      @Param("tagId") Integer tagId, @Param("majorId") Integer majorId, @Param("term") String term);
 }

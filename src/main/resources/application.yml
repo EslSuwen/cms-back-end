@@ -2,13 +2,13 @@ server: # 配置server
   tomcat: # springboot乱码解决
     uri-encoding: UTF-8
   servlet:
-    context-path: /
+    context-path: /cms-api
   port: 9721
 
 spring:
   profiles:
     active:
-      - dev3
+      - dev
       - property
   datasource:
     druid:

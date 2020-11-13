@@ -1,5 +1,6 @@
 package com.cqjtu.cms.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.cqjtu.cms.constant.ResultCode;
 import com.cqjtu.cms.model.dto.Result;
 import com.cqjtu.cms.model.entity.Category;
@@ -19,7 +20,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @Api(tags = "课程类别-前端控制器")
 @RestController
-@RequestMapping("/cms/category")
+@RequestMapping("/category")
 public class CategoryController {
 
   private CategoryService categoryService;
@@ -44,11 +45,21 @@ public class CategoryController {
 
   @GetMapping("/getByMajorIdAndGrade")
   @ApiOperation("通过专业编号年级获取课程类别信息")
+  @Deprecated
   public ResponseEntity<Result> getCategoryByMajorIdAndGrade(
       @ApiParam(value = "专业编号", required = true) @RequestParam Integer majorId,
       @ApiParam(value = "年级", required = true) @RequestParam Integer grade) {
     return Result.success(
         categoryService.getByMajorIdAndGrade(majorId, grade), ResultCode.SUCCESS_GET_DATA);
+  }
+
+  @GetMapping("/getByGrade/{grade}")
+  @ApiOperation("通过年级获取课程类别信息")
+  public ResponseEntity<Result> getCategoryByMajorIdAndGrade(
+      @ApiParam(value = "年级", required = true) @PathVariable Integer grade) {
+    return Result.success(
+        categoryService.list(new QueryWrapper<Category>().eq("grade", grade)),
+        ResultCode.SUCCESS_GET_DATA);
   }
 
   @PostMapping("/add")

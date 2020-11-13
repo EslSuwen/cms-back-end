@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
  * @since 2020-11-05
  */
 @RestController
-@RequestMapping("/cms/college")
+@RequestMapping("/college")
 @Api(tags = "学院-前端控制器")
 public class CollegeController {
 

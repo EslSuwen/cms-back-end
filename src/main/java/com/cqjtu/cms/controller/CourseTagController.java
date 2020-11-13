@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @Api(tags = "课程平台关联课程-前端控制器")
 @RestController
-@RequestMapping("/cms/course-tag")
+@RequestMapping("/course-tag")
 public class CourseTagController {
 
   private CourseTagService courseTagService;
@@ -52,13 +52,14 @@ public class CourseTagController {
         ResultCode.SUCCESS_GET_DATA);
   }
 
-  @GetMapping("/getByTagIdAndTerm")
-  @ApiOperation("通过课程平台编号学期获取关联课程信息")
-  public ResponseEntity<Result> getByTagIdAndTerm(
+  @GetMapping("/getByTagAndMajor")
+  @ApiOperation("通过课程平台编号专业获取关联课程信息")
+  public ResponseEntity<Result> getByTagIdAndMajor(
       @ApiParam(value = "课程平台编号", required = true) @RequestParam Integer id,
+      @ApiParam(value = "专业编号", required = true) @RequestParam Integer majorId,
       @ApiParam(value = "学期") @RequestParam(required = false) String term) {
     return Result.success(
-        courseTagService.getByTagIdAndTerm(id, term), ResultCode.SUCCESS_GET_DATA);
+        courseTagService.getByTagAndMajor(id, majorId, term), ResultCode.SUCCESS_GET_DATA);
   }
 
   @PostMapping("/add")

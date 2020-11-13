@@ -27,6 +27,9 @@ public class Tag implements Serializable {
   @TableId(value = "id", type = IdType.AUTO)
   private Integer id;
 
+  @ApiModelProperty(value = "专业编号")
+  private Integer majorId;
+
   @ApiModelProperty(value = "课程类型编号")
   private Integer categoryId;
 
