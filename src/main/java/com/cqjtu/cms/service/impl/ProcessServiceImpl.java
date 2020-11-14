@@ -8,6 +8,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.cqjtu.cms.exception.ServiceException;
 import com.cqjtu.cms.mapper.ProcessMapper;
 import com.cqjtu.cms.model.dto.input.ProcessImportDto;
+import com.cqjtu.cms.model.dto.output.CourseTagDto;
 import com.cqjtu.cms.model.dto.output.ImportDataOutputDTO;
 import com.cqjtu.cms.model.dto.output.ProcessDto;
 import com.cqjtu.cms.model.entity.Category;
@@ -78,7 +79,7 @@ public class ProcessServiceImpl extends ServiceImpl<ProcessMapper, Process>
       // 跳过不存在课程类别的数据
       Optional<Category> category =
           categoryList.stream()
-              .filter(each -> !each.getName().equals(importDTO.getCategoryName()))
+              .filter(each -> each.getName().equals(importDTO.getCategoryName()))
               .findFirst();
       if (!category.isPresent()) {
         ignoreRecordNum++;

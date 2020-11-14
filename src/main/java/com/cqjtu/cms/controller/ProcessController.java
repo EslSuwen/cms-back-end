@@ -1,13 +1,9 @@
 package com.cqjtu.cms.controller;
 
-import cn.hutool.core.bean.BeanUtil;
-import cn.hutool.core.lang.Console;
-import cn.hutool.poi.excel.sax.handler.RowHandler;
 import com.cqjtu.cms.constant.Constants;
 import com.cqjtu.cms.constant.ResultCode;
 import com.cqjtu.cms.model.dto.input.ProcessImportDto;
 import com.cqjtu.cms.model.dto.output.Result;
-import com.cqjtu.cms.model.entity.Process;
 import com.cqjtu.cms.service.ProcessService;
 import com.cqjtu.cms.util.ExcelUtils;
 import io.swagger.annotations.Api;
@@ -25,7 +21,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -68,15 +63,6 @@ public class ProcessController {
           "test",
           "college");
 
-  private RowHandler createRowHandler() {
-    return new RowHandler() {
-      @Override
-      public void handle(int sheetIndex, long rowIndex, List<Object> rowlist) {
-        Console.log("[{}] [{}] {}", sheetIndex, rowIndex, rowlist);
-      }
-    };
-  }
-
   @ApiOperation("教学计划表导入")
   @PostMapping("/importProcessExcel")
   public ResponseEntity<Result> importProcessExcel(
@@ -98,7 +84,8 @@ public class ProcessController {
         return Result.failure(ResultCode.PARAM_ERROR);
       }
       return Result.success(
-          processService.importExcel(majorId, grade, processImportDtoList), ResultCode.SUCCESS_ADD_DATA);
+          processService.importExcel(majorId, grade, processImportDtoList),
+          ResultCode.SUCCESS_ADD_DATA);
     } catch (IOException e) {
       log.error("上传文件失败", e);
       return Result.failure(ResultCode.PARAM_ERROR);

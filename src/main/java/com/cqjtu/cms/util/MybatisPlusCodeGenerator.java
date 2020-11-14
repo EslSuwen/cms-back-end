@@ -27,9 +27,9 @@ public final class MybatisPlusCodeGenerator {
   private static final String DB_USER = "root";
 
   private static final String DB_URL =
-      "jdbc:mysql://localhost:3306/cmsdb?serverTimezone=Asia/Shanghai&characterEncoding=utf8&useUnicode=true&useSSL=false&allowPublicKeyRetrieval=true";
+      "jdbc:mysql://sh-cdb-a2adziso.sql.tencentcdb.com:60677/cmsdb-dev?serverTimezone=Asia/Shanghai&characterEncoding=utf8&useUnicode=true&useSSL=false&allowPublicKeyRetrieval=true";
 
-  private static final String DB_PWD = "Liyu8824";
+  private static final String DB_PWD = "kad@666@888";
 
   private static final String PACKAGE_PARENT = "com.cqjtu";
 

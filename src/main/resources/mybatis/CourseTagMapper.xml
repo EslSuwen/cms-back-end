@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cqjtu.cms.mapper.CourseTagMapper">
 
-    <select id="getByTagIdAndTerm" resultType="com.cqjtu.cms.model.dto.output.CourseTagDto">
+    <select id="getByTagIdAndTerm" resultType="com.cqjtu.cms.model.entity.ProcessTag">
         SELECT ct.id course_tag_id,
         course_id,
         tag_id,

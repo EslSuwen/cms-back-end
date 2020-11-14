@@ -2,7 +2,7 @@ package com.cqjtu.cms.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.cqjtu.cms.model.dto.output.CourseTagDto;
-import com.cqjtu.cms.model.entity.CourseTag;
+import com.cqjtu.cms.model.dto.output.ProcessTagDto;
 import com.cqjtu.cms.model.entity.ProcessTag;
 
 import java.util.List;
@@ -11,10 +11,9 @@ import java.util.List;
  * 课程平台关联课程 服务类
  *
  * @author suwen
- * @since 2020-11-05
+ * @since 2020-11-14
  */
-public interface CourseTagService extends IService<CourseTag> {
-
+public interface ProcessTagService extends IService<ProcessTag> {
   /**
    * 通过tagId,term查询
    *
@@ -25,5 +24,5 @@ public interface CourseTagService extends IService<CourseTag> {
    * @author suwen
    * @date 2020/11/8 9:41
    */
-  List<ProcessTag> getByTagAndMajor(Integer tagId, Integer majorId, String term);
+  List<ProcessTagDto> getByTagIdAndTerm(Integer tagId, Integer majorId, String term);
 }
