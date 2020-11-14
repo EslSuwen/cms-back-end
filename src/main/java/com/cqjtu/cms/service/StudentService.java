@@ -1,9 +1,8 @@
 package com.cqjtu.cms.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.cqjtu.cms.model.dto.StudentDto;
+import com.cqjtu.cms.model.dto.output.StudentDto;
 import com.cqjtu.cms.model.entity.Student;
-import org.apache.ibatis.annotations.Param;
 
 /**
  * 学生信息表 服务类

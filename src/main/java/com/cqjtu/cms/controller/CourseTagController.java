@@ -2,7 +2,7 @@ package com.cqjtu.cms.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.cqjtu.cms.constant.ResultCode;
-import com.cqjtu.cms.model.dto.Result;
+import com.cqjtu.cms.model.dto.output.Result;
 import com.cqjtu.cms.model.entity.CourseTag;
 import com.cqjtu.cms.service.CourseTagService;
 import io.swagger.annotations.Api;

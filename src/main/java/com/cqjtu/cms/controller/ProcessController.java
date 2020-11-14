@@ -1,10 +1,12 @@
 package com.cqjtu.cms.controller;
 
+import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.lang.Console;
 import cn.hutool.poi.excel.sax.handler.RowHandler;
 import com.cqjtu.cms.constant.Constants;
 import com.cqjtu.cms.constant.ResultCode;
-import com.cqjtu.cms.model.dto.Result;
+import com.cqjtu.cms.model.dto.input.ProcessImportDto;
+import com.cqjtu.cms.model.dto.output.Result;
 import com.cqjtu.cms.model.entity.Process;
 import com.cqjtu.cms.service.ProcessService;
 import com.cqjtu.cms.util.ExcelUtils;
@@ -23,6 +25,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -48,19 +51,22 @@ public class ProcessController {
   /** 排课信息导入excel表头字段 */
   private static final List<String> FIELD_NAMES =
       Arrays.asList(
-          "curriculumNumber",
-          "week",
-          "weekTypeName",
-          "learnTime",
-          "studyPlace",
-          "code",
-          "name",
-          "workNumber",
-          "teacherName",
-          "instituteName",
-          "clazzName",
-          "studyPeopleNum",
-          "termNameImport");
+          "categoryName",
+          "courseType",
+          "term",
+          "courseId",
+          "courseName",
+          "period",
+          "termPeriod",
+          "coursePeriod",
+          "expPeriod",
+          "pcPeriod",
+          "prPeriod",
+          "credit",
+          "categoryType",
+          "year",
+          "test",
+          "college");
 
   private RowHandler createRowHandler() {
     return new RowHandler() {
@@ -78,6 +84,7 @@ public class ProcessController {
       @ApiParam("年级") @RequestParam Integer grade,
       @ApiParam("excel 文件") @RequestParam MultipartFile file) {
     String fileName = file.getOriginalFilename();
+    log.info("fileName: {}, length: {}", fileName, file.getSize());
     // 判断文件是否是excel文件
     assert fileName != null;
     if (!fileName.endsWith(Constants.XLS_SUFFIX) && !fileName.endsWith(Constants.XLSX_SUFFIX)) {
@@ -85,14 +92,13 @@ public class ProcessController {
       return Result.failure(ResultCode.PARAM_ERROR);
     }
     try (InputStream inputStream = file.getInputStream()) {
-      List<Process> processList =
-          ExcelUtils.readExcel(inputStream, fileName, Process.class, 0, FIELD_NAMES, 1, 1);
-      if (CollectionUtils.isEmpty(processList)) {
+      List<ProcessImportDto> processImportDtoList =
+          ExcelUtils.readExcel(inputStream, fileName, ProcessImportDto.class, 0, FIELD_NAMES, 3, 0);
+      if (CollectionUtils.isEmpty(processImportDtoList)) {
         return Result.failure(ResultCode.PARAM_ERROR);
       }
-      return Result.success(processList);
-      // return Result.success(processService.importExcel(majorId, grade, processList),
-      // ResultCode.SUCCESS_ADD_DATA);
+      return Result.success(
+          processService.importExcel(majorId, grade, processImportDtoList), ResultCode.SUCCESS_ADD_DATA);
     } catch (IOException e) {
       log.error("上传文件失败", e);
       return Result.failure(ResultCode.PARAM_ERROR);

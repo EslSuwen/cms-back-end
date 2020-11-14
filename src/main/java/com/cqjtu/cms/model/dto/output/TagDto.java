@@ -1,5 +1,6 @@
-package com.cqjtu.cms.model.dto;
+package com.cqjtu.cms.model.dto.output;
 
+import com.cqjtu.cms.model.dto.output.CourseTagDto;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;

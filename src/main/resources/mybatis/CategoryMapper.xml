@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cqjtu.cms.mapper.CategoryMapper">
 
-    <select id="getByMajorIdAndGrade" resultType="com.cqjtu.cms.model.dto.CategoryDto">
+    <select id="getByMajorIdAndGrade" resultType="com.cqjtu.cms.model.dto.output.CategoryDto">
         SELECT c.id      category_id,
                c.`name`  category_name,
                c.major_id,

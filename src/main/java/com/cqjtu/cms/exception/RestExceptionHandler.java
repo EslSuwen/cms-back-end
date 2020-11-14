@@ -1,7 +1,7 @@
 package com.cqjtu.cms.exception;
 
 import com.cqjtu.cms.constant.ResultCode;
-import com.cqjtu.cms.model.dto.Result;
+import com.cqjtu.cms.model.dto.output.Result;
 import io.lettuce.core.RedisCommandTimeoutException;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;

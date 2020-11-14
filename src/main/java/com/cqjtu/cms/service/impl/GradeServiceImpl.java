@@ -2,7 +2,7 @@ package com.cqjtu.cms.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.cqjtu.cms.mapper.GradeMapper;
-import com.cqjtu.cms.model.dto.CourseTagDto;
+import com.cqjtu.cms.model.dto.output.CourseTagDto;
 import com.cqjtu.cms.model.entity.Grade;
 import com.cqjtu.cms.service.GradeService;
 import org.springframework.stereotype.Service;

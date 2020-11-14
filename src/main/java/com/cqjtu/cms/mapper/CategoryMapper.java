@@ -1,8 +1,9 @@
 package com.cqjtu.cms.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.cqjtu.cms.model.dto.CategoryDto;
+import com.cqjtu.cms.model.dto.output.CategoryDto;
 import com.cqjtu.cms.model.entity.Category;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -19,7 +20,7 @@ public interface CategoryMapper extends BaseMapper<Category> {
      *
      * @param majorId 专业编号
      * @param grade 年级
-     * @return java.util.List<com.cqjtu.cms.model.dto.CategoryDto>
+     * @return java.util.List<com.cqjtu.cms.model.dto.output.CategoryDto>
      * @author suwen
      * @date 2020/11/8 9:18
      */

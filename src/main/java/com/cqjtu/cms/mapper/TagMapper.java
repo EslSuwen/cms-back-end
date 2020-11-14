@@ -1,7 +1,7 @@
 package com.cqjtu.cms.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.cqjtu.cms.model.dto.TagDto;
+import com.cqjtu.cms.model.dto.output.TagDto;
 import com.cqjtu.cms.model.entity.Tag;
 import org.apache.ibatis.annotations.Select;
 
@@ -29,7 +29,7 @@ public interface TagMapper extends BaseMapper<Tag> {
    * 通过课程类别编号获取课程平台信息
    *
    * @param categoryId 课程类别编号
-   * @return java.util.List<com.cqjtu.cms.model.dto.TagDto>
+   * @return java.util.List<com.cqjtu.cms.model.dto.output.TagDto>
    * @author suwen
    * @date 2020/11/8 9:02
    */

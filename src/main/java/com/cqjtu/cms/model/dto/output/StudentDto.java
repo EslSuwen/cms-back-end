@@ -1,4 +1,4 @@
-package com.cqjtu.cms.model.dto;
+package com.cqjtu.cms.model.dto.output;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

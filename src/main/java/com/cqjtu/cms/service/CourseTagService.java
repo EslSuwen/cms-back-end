@@ -1,7 +1,7 @@
 package com.cqjtu.cms.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.cqjtu.cms.model.dto.CourseTagDto;
+import com.cqjtu.cms.model.dto.output.CourseTagDto;
 import com.cqjtu.cms.model.entity.CourseTag;
 
 import java.util.List;
@@ -20,7 +20,7 @@ public interface CourseTagService extends IService<CourseTag> {
    * @param tagId 课程平台编号
    * @param majorId 专业编号
    * @param term 学期
-   * @return java.util.List<com.cqjtu.cms.model.dto.CourseTagDto>
+   * @return java.util.List<com.cqjtu.cms.model.dto.output.CourseTagDto>
    * @author suwen
    * @date 2020/11/8 9:41
    */

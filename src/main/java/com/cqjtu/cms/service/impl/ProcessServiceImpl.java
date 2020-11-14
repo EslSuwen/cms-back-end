@@ -1,14 +1,24 @@
 package com.cqjtu.cms.service.impl;
 
+import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.core.util.ArrayUtil;
+import cn.hutool.core.util.StrUtil;
+import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.cqjtu.cms.exception.ServiceException;
 import com.cqjtu.cms.mapper.ProcessMapper;
-import com.cqjtu.cms.model.dto.ImportDataOutputDTO;
+import com.cqjtu.cms.model.dto.input.ProcessImportDto;
+import com.cqjtu.cms.model.dto.output.ImportDataOutputDTO;
+import com.cqjtu.cms.model.dto.output.ProcessDto;
+import com.cqjtu.cms.model.entity.Category;
 import com.cqjtu.cms.model.entity.Process;
 import com.cqjtu.cms.service.CategoryService;
 import com.cqjtu.cms.service.ProcessService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * 教学执行表 服务实现类
@@ -22,127 +32,88 @@ public class ProcessServiceImpl extends ServiceImpl<ProcessMapper, Process>
 
   private CategoryService categoryService;
 
+  @Autowired
+  public void setCategoryService(CategoryService categoryService) {
+    this.categoryService = categoryService;
+  }
+
   @Override
   public ImportDataOutputDTO importExcel(
-      Integer majorId, Integer grade, List<Process> processList) {
-    return null;
-  }
+      Integer majorId, Integer grade, List<ProcessImportDto> processImportDtoList) {
 
-  /* {
-
-  // 查找所有课程类别
-  List<Category> categoryList = categoryService.list();
-  if (CollectionUtils.isEmpty(categoryList)) {
-    throw new ServiceException("请先添加课程类别信息");
-  }
-
-  // 过滤出所有的学期学年
-  Set<String> termNameSet =
-      curriculumImportDTO.stream()
-          .map(dto -> dto.getTermNameImport())
-          .collect(Collectors.toSet());
-  if (CollectionUtils.isEmpty(termNameSet) || termNameSet.size() != 1) {
-    throw new ServiceException("导入数据中学期学年不能为空并且必须是同一学期学年数据");
-  }
-
-  // 查询导入数据中对应的学期是否存在
-  String termName = termNameSet.iterator().next();
-  if (StringUtils.isEmpty(termName)) {
-    throw new ServiceException("表格中学期不能为空");
-  }
-
-  Optional<Term> optionalTerm =
-      allTerm.stream().filter(term -> term.getName().equals(termName)).findFirst();
-  if (!optionalTerm.isPresent()) {
-    throw new ServiceException(termName + "不存在,请先添加该学期");
-  }
-
-  */
-  /** 导入数据对应的学期 */
-  /*
-  Term term = optionalTerm.get();
-
-  */
-  /** 查询已有排课列表 */
-  /*
-  List<Curriculum> existCurriculums = curriculumRepository.findByTermId(term.getId());
-  */
-  /** 查询已有老师列表 */
-  /*
-  //        List<Teacher> existTeachers = teacherRepository.findAll();
-  // 导入excel中新增记录条数
-  int newRecordNum = 0;
-  // 导入excel中更新记录条数
-  int modifyRecordNum = 0;
-  // 导入excel中因数据自身问题忽略记录条数
-  int ignoreRecordNum = 0;
-
-  for (CurriculumImportDTO importDTO : curriculumImportDTO) {
-
-    */
-  /** 如果导入数据中排课任务编号 教师工号 学期学年 有任意一个为空,该条数据就直接跳过 */
-  /*
-  if (StringUtils.isEmpty(importDTO.getCurriculumNumber())
-      || StringUtils.isEmpty(importDTO.getWorkNumber())
-      || StringUtils.isEmpty(importDTO.getTermNameImport())) {
-    ignoreRecordNum++;
-    continue;
-  }
-
-  // 学习时间  比如：20102 第一位2代表星期2  后面0102代表第1-2节课
-  String learnTime = importDTO.getLearnTime() == null ? "" : importDTO.getLearnTime();
-  // 星期几
-  Integer dayOfWeek = null;
-  // 上课节次
-  String section = null;
-
-  if (!StringUtils.isEmpty(learnTime)) {
-    dayOfWeek = Integer.valueOf(learnTime.substring(0, 1));
-    section = learnTime.substring(1);
-  }
-
-  */
-  /** 如果该条排课信息是否存在 通过排课任务号+老师工号+学期+上课时间 确定唯一键,更新这条数据 */
-  /*
-  if (!CollectionUtils.isEmpty(existCurriculums)) {
-    Curriculum existCurriculum =
-        existCurriculums.stream()
-            .filter(
-                course ->
-                    course.getCurriculumNumber().equals(importDTO.getCurriculumNumber())
-                        && course.getWorkNumber().equals(importDTO.getWorkNumber())
-                        && course.getTermId().equals(term.getId())
-                        && learnTime.equals(course.getDayOfWeek() + course.getSection()))
-            .findFirst()
-            .orElse(null);
-    if (existCurriculum != null) {
-      BeanUtils.copyProperties(importDTO, existCurriculum);
-      existCurriculum.setWeekType(
-          WeekType.getEnumByDesc(importDTO.getWeekTypeName()).getValue());
-      existCurriculum.setSection(section);
-      existCurriculum.setDayOfWeek(dayOfWeek);
-      curriculumRepository.save(existCurriculum);
-      modifyRecordNum++;
-      continue;
+    // 查找所有课程类别
+    List<Category> categoryList = categoryService.getByGrade(grade);
+    if (ArrayUtil.isEmpty(categoryList)) {
+      throw new ServiceException("请先添加本年级的课程类别信息");
     }
-  }
 
-  */
-  /** 新增排课信息 */
-  /*
-      Curriculum curriculum = new Curriculum();
-      BeanUtils.copyProperties(importDTO, curriculum);
-      curriculum.setTermId(term.getId());
-      curriculum.setTermName(term.getName());
-      // 目前只有土木学院  土木学院id=1
-      curriculum.setInstituteId(1);
-      curriculum.setWeekType(WeekType.getEnumByDesc(importDTO.getWeekTypeName()).getValue());
-      curriculum.setDayOfWeek(dayOfWeek);
-      curriculum.setSection(section);
-      curriculumRepository.save(curriculum);
+    // 根据专业编号年级查询已有数据
+    List<ProcessDto> processDtoList = getByMajorAndGrade(majorId, grade);
+
+    // 导入excel中新增记录条数
+    int newRecordNum = 0;
+    // 导入excel中更新记录条数
+    int modifyRecordNum = 0;
+    // 导入excel中因数据自身问题忽略记录条数
+    int ignoreRecordNum = 0;
+
+    for (ProcessImportDto importDTO : processImportDtoList) {
+
+      // 跳过必修课
+      if ("必修".equals(importDTO.getCourseType())) {
+        ignoreRecordNum++;
+        continue;
+      }
+
+      // 如果导入数据中课程类别 学期 课程编码 课程名称 学分 有任意一个为空,该条数据就直接跳过
+      if (StrUtil.isEmpty(importDTO.getCategoryName())
+          || StrUtil.isEmpty(importDTO.getTerm())
+          || StrUtil.isEmpty(importDTO.getCourseId().toString())
+          || StrUtil.isEmpty(importDTO.getCourseName())
+          || StrUtil.isEmpty(importDTO.getCredit())) {
+        ignoreRecordNum++;
+        continue;
+      }
+
+      // 跳过不存在课程类别的数据
+      Optional<Category> category =
+          categoryList.stream()
+              .filter(each -> !each.getName().equals(importDTO.getCategoryName()))
+              .findFirst();
+      if (!category.isPresent()) {
+        ignoreRecordNum++;
+        continue;
+      }
+      importDTO.setCategoryId(category.get().getId());
+
+      // 如果该条教学计划信息存在 通过年级+专业编号+课程号 确定唯一键,更新这条数据
+      if (!CollectionUtils.isEmpty(processDtoList)) {
+        ProcessDto existProcess =
+            processDtoList.stream()
+                .filter(processDto -> processDto.getCourseId().equals(importDTO.getCourseId()))
+                .findFirst()
+                .orElse(null);
+        if (existProcess != null) {
+          Process updateProcess = BeanUtil.copyProperties(importDTO, Process.class);
+          updateProcess.setId(existProcess.getProcessId());
+          updateById(updateProcess);
+          updateProcess.setMajorId(majorId);
+          modifyRecordNum++;
+          continue;
+        }
+      }
+
+      // 新增教学计划信息信息
+      Process newProcess = BeanUtil.copyProperties(importDTO, Process.class);
+      newProcess.setMajorId(majorId);
+      save(newProcess);
       newRecordNum++;
     }
     return new ImportDataOutputDTO(newRecordNum, modifyRecordNum, ignoreRecordNum);
+  }
 
-  }*/
+  @Override
+  public List<ProcessDto> getByMajorAndGrade(Integer majorId, Integer grade) {
+    return baseMapper.getByMajorAndGrade(majorId, grade);
+  }
 }

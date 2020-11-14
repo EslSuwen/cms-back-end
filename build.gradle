@@ -35,7 +35,7 @@ dependencies {
 
     implementation 'cn.dev33:sa-token:1.4.0'
 
-    implementation 'com.github.xiaoymin:knife4j-spring-boot-starter:3.0.1'
+    implementation 'com.github.xiaoymin:knife4j-spring-boot-starter:2.0.3'
 
     implementation 'cn.hutool:hutool-all:5.3.10'
 

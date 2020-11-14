@@ -1,7 +1,8 @@
 package com.cqjtu.cms.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.cqjtu.cms.constant.ResultCode;
-import com.cqjtu.cms.model.dto.Result;
+import com.cqjtu.cms.model.dto.output.Result;
 import com.cqjtu.cms.model.entity.Tag;
 import com.cqjtu.cms.service.TagService;
 import io.swagger.annotations.Api;
@@ -44,9 +45,21 @@ public class TagController {
 
   @GetMapping("/getByCategoryId/{id}")
   @ApiOperation("通过课程平台编号获取课程平台关系信息")
+  @Deprecated
   public ResponseEntity<Result> getTagByCategoryId(
       @ApiParam(value = "课程平台编号", required = true) @PathVariable Integer id) {
     return Result.success(tagService.getByCategoryId(id), ResultCode.SUCCESS_GET_DATA);
+  }
+
+  @GetMapping("/getByCategoryIdAndMajorId")
+  @ApiOperation("通过课程类别专业获取课程平台关系信息")
+  public ResponseEntity<Result> getTagByCategoryIdMajorId(
+      @ApiParam(value = "课程类别编号", required = true) @RequestParam Integer categoryId,
+      @ApiParam(value = "专业编号", required = true) @RequestParam Integer majorId) {
+    return Result.success(
+        tagService.list(
+            new QueryWrapper<Tag>().eq("category_id", categoryId).eq("major_id", majorId)),
+        ResultCode.SUCCESS_GET_DATA);
   }
 
   @PostMapping("/add")

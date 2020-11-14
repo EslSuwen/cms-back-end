@@ -1,7 +1,7 @@
 package com.cqjtu.cms.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.cqjtu.cms.model.dto.StudentDto;
+import com.cqjtu.cms.model.dto.output.StudentDto;
 import com.cqjtu.cms.model.entity.Student;
 import org.apache.ibatis.annotations.Param;
 

@@ -2,4 +2,21 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cqjtu.cms.mapper.ProcessMapper">
 
+    <select id="getByMajorAndGrade" resultType="com.cqjtu.cms.model.dto.output.ProcessDto">
+        # 专业 年级获取所有教学计划信息
+        SELECT p.id   process_id,
+               course_id,
+               course_name,
+               term,
+               credit,
+               category_id,
+               major_id,
+               `name` category_name,
+               grade
+        FROM `process` p,
+             category c
+        WHERE p.category_id = c.id
+          AND major_id = #{majorId}
+          AND grade = #{grade}
+    </select>
 </mapper>

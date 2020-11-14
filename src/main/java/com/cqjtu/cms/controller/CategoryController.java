@@ -1,8 +1,7 @@
 package com.cqjtu.cms.controller;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.cqjtu.cms.constant.ResultCode;
-import com.cqjtu.cms.model.dto.Result;
+import com.cqjtu.cms.model.dto.output.Result;
 import com.cqjtu.cms.model.entity.Category;
 import com.cqjtu.cms.service.CategoryService;
 import io.swagger.annotations.Api;
@@ -57,9 +56,7 @@ public class CategoryController {
   @ApiOperation("通过年级获取课程类别信息")
   public ResponseEntity<Result> getCategoryByMajorIdAndGrade(
       @ApiParam(value = "年级", required = true) @PathVariable Integer grade) {
-    return Result.success(
-        categoryService.list(new QueryWrapper<Category>().eq("grade", grade)),
-        ResultCode.SUCCESS_GET_DATA);
+    return Result.success(categoryService.getByGrade(grade), ResultCode.SUCCESS_GET_DATA);
   }
 
   @PostMapping("/add")
