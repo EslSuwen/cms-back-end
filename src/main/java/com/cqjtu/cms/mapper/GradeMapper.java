@@ -2,6 +2,7 @@ package com.cqjtu.cms.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.cqjtu.cms.model.dto.output.CourseTagDto;
+import com.cqjtu.cms.model.dto.output.ProcessTagDto;
 import com.cqjtu.cms.model.entity.Grade;
 import org.apache.ibatis.annotations.Param;
 
@@ -20,11 +21,24 @@ public interface GradeMapper extends BaseMapper<Grade> {
    *
    * @param tagId 课程平台编号
    * @param sno 学生编号
-   * @param term
+   * @param term 学期
    * @return java.util.List<com.cqjtu.cms.model.dto.output.CourseTagDto>
    * @author suwen
    * @date 2020/11/8 9:41
    */
   List<CourseTagDto> getByTagIdAndSno(
+      @Param("tagId") Integer tagId, @Param("sno") String sno, @Param("term") String term);
+
+  /**
+   * 课程平台编号,学生编号查询修读信息
+   *
+   * @param tagId 课程平台编号
+   * @param sno 学生编号
+   * @param term 学期
+   * @return java.util.List<com.cqjtu.cms.model.dto.output.CourseTagDto>
+   * @author suwen
+   * @date 2020/11/8 9:41
+   */
+  List<ProcessTagDto> getProcessTagByTagIdAndSno(
       @Param("tagId") Integer tagId, @Param("sno") String sno, @Param("term") String term);
 }

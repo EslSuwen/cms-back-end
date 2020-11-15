@@ -3,6 +3,7 @@ package com.cqjtu.cms.service.impl;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.cqjtu.cms.mapper.GradeMapper;
 import com.cqjtu.cms.model.dto.output.CourseTagDto;
+import com.cqjtu.cms.model.dto.output.ProcessTagDto;
 import com.cqjtu.cms.model.entity.Grade;
 import com.cqjtu.cms.service.GradeService;
 import org.springframework.stereotype.Service;
@@ -21,5 +22,10 @@ public class GradeServiceImpl extends ServiceImpl<GradeMapper, Grade> implements
   @Override
   public List<CourseTagDto> getByTagIdAndSno(Integer tagId, String sno, String term) {
     return baseMapper.getByTagIdAndSno(tagId, sno, term);
+  }
+
+  @Override
+  public List<ProcessTagDto> getProcessTagByTagIdAndSno(Integer tagId, String sno, String term) {
+    return baseMapper.getProcessTagByTagIdAndSno(tagId, sno, term);
   }
 }

@@ -20,6 +20,25 @@
         </association>
     </resultMap>
 
+    <resultMap id="processTagGradeRM" type="com.cqjtu.cms.model.dto.output.ProcessTagDto">
+        <result column="process_tag_id" jdbcType="INTEGER" property="processTagId"/>
+        <result column="process_id" jdbcType="INTEGER" property="processId"/>
+        <result column="course_id" jdbcType="INTEGER" property="courseId"/>
+        <result column="tag_id" jdbcType="INTEGER" property="tagId"/>
+        <result column="course_name" jdbcType="VARCHAR" property="courseName"/>
+        <result column="tag_name" jdbcType="VARCHAR" property="tagName"/>
+        <result column="credit" jdbcType="VARCHAR" property="credit"/>
+        <result column="term" jdbcType="VARCHAR" property="term"/>
+        <result column="required" jdbcType="VARCHAR" property="required"/>
+        <result column="ps" jdbcType="VARCHAR" property="ps"/>
+        <association property="grade" javaType="com.cqjtu.cms.model.entity.Grade">
+            <result column="grade_id" jdbcType="INTEGER" property="id"/>
+            <result column="sno" jdbcType="VARCHAR" property="sno"/>
+            <result column="course_id" jdbcType="VARCHAR" property="courseId"/>
+            <result column="result" jdbcType="VARCHAR" property="result"/>
+        </association>
+    </resultMap>
+
     <select id="getByTagIdAndSno" resultMap="courseTagGradeRM">
         SELECT ct.id course_tag_id,
         ct.course_id,
@@ -40,6 +59,34 @@
         WHERE ct.course_id = c.id
         AND ct.tag_id = t.id
         AND g.course_id = ct.course_id
+        AND sno = #{sno}
+        AND tag_id = #{tagId}
+        <if test="term != null and term != ''">
+            AND term=#{term}
+        </if>
+    </select>
+
+    <select id="getProcessTagByTagIdAndSno" resultMap="processTagGradeRM">
+        SELECT pt.id process_tag_id,
+        p.id process_id,
+        p.course_id,
+        tag_id,
+        p.course_name,
+        t.`name` tag_name,
+        credit,
+        term,
+        required,
+        ps,
+        g.id grade_id,
+        sno,
+        result
+        FROM process_tag pt,
+        process p,
+        tag t,
+        grade g
+        WHERE p.course_id = g.course_id
+        AND pt.process_id = p.id
+        AND pt.tag_id = t.id
         AND sno = #{sno}
         AND tag_id = #{tagId}
         <if test="term != null and term != ''">

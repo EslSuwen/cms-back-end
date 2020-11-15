@@ -38,12 +38,23 @@ public class StudentInfoController {
 
   @GetMapping("/getCourseTagInfo")
   @ApiOperation("获取平台关联课程修读信息")
+  @Deprecated
   public ResponseEntity<Result> getTagInfoByIdAndSno(
       @ApiParam(value = "课程平台编号", required = true) @RequestParam Integer id,
       @ApiParam(value = "学生编号", required = true) @RequestParam String sno,
       @ApiParam(value = "学期") @RequestParam(required = false) String term) {
     return Result.success(
         gradeService.getByTagIdAndSno(id, sno, term), ResultCode.SUCCESS_GET_DATA);
+  }
+
+  @GetMapping("/getProcessTagInfo")
+  @ApiOperation("获取平台关联课程修读信息")
+  public ResponseEntity<Result> getProcessTagInfo(
+      @ApiParam(value = "课程平台编号", required = true) @RequestParam Integer id,
+      @ApiParam(value = "学生编号", required = true) @RequestParam String sno,
+      @ApiParam(value = "学期") @RequestParam(required = false) String term) {
+    return Result.success(
+        gradeService.getProcessTagByTagIdAndSno(id, sno, term), ResultCode.SUCCESS_GET_DATA);
   }
 
   @GetMapping("/getById/{id}")
