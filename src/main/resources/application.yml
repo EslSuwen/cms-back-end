@@ -8,7 +8,7 @@ server: # 配置server
 spring:
   profiles:
     active:
-      - dev
+      - prod
       - property
   datasource:
     druid:
@@ -77,9 +77,10 @@ spring: # 开发环境配置 3
 
 ---
 spring: # 生产环境配置 1
+  profiles: prod
   datasource:
     druid:
-      url: jdbc:mysql://sh-cdb-a2adziso.sql.tencentcdb.com:60677/cmsdb-prod?serverTimezone=Asia/Shanghai&characterEncoding=utf8&useUnicode=true&useSSL=false&allowPublicKeyRetrieval=true
+      url: jdbc:mysql://sh-cdb-a2adziso.sql.tencentcdb.com:60677/cmsdb-dev?serverTimezone=Asia/Shanghai&characterEncoding=utf8&useUnicode=true&useSSL=false&allowPublicKeyRetrieval=true
       username: root
       password: kad@666@888
 

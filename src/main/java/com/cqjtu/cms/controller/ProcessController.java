@@ -1,9 +1,11 @@
 package com.cqjtu.cms.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.cqjtu.cms.constant.Constants;
 import com.cqjtu.cms.constant.ResultCode;
 import com.cqjtu.cms.model.dto.input.ProcessImportDto;
 import com.cqjtu.cms.model.dto.output.Result;
+import com.cqjtu.cms.model.entity.Process;
 import com.cqjtu.cms.service.ProcessService;
 import com.cqjtu.cms.util.ExcelUtils;
 import io.swagger.annotations.Api;
@@ -13,10 +15,7 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.CollectionUtils;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -90,5 +89,50 @@ public class ProcessController {
       log.error("上传文件失败", e);
       return Result.failure(ResultCode.PARAM_ERROR);
     }
+  }
+
+  @GetMapping("/getByCategoryIdAndMajorId")
+  @ApiOperation("通过课程类别专业获取课程平台关系信息")
+  public ResponseEntity<Result> getTagByCategoryIdMajorId(
+      @ApiParam(value = "课程类别编号", required = true) @RequestParam Integer categoryId,
+      @ApiParam(value = "专业编号", required = true) @RequestParam Integer majorId) {
+    return Result.success(
+        processService.list(
+            new QueryWrapper<Process>().eq("category_id", categoryId).eq("major_id", majorId)),
+        ResultCode.SUCCESS_GET_DATA);
+  }
+
+  @GetMapping("/getAll")
+  @ApiOperation("获取所有执行计划信息")
+  public ResponseEntity<Result> getAllProcessInfo() {
+    return Result.success(processService.list(), ResultCode.SUCCESS_GET_DATA);
+  }
+
+  @GetMapping("/getById/{id}")
+  @ApiOperation("通过编号获取执行计划信息")
+  public ResponseEntity<Result> getProcessById(
+      @ApiParam(value = "执行计划编号", required = true) @PathVariable String id) {
+    return Result.success(processService.getById(id), ResultCode.SUCCESS_GET_DATA);
+  }
+
+  @PostMapping("/add")
+  @ApiOperation("增加执行计划信息")
+  public ResponseEntity<Result> addProcess(
+      @ApiParam(value = "执行计划信息", required = true) @RequestBody Process process) {
+    return Result.success(processService.save(process), ResultCode.SUCCESS_ADD_DATA);
+  }
+
+  @PutMapping("/update")
+  @ApiOperation("修改执行计划信息")
+  public ResponseEntity<Result> updateProcess(
+      @ApiParam(value = "执行计划信息", required = true) @RequestBody Process process) {
+    return Result.success(processService.updateById(process), ResultCode.SUCCESS_UPDATE_DATA);
+  }
+
+  @DeleteMapping("/removeById/{id}")
+  @ApiOperation("通过编号删除执行计划信息")
+  public ResponseEntity<Result> removeProcessById(
+      @ApiParam(value = "执行计划编号", required = true) @PathVariable Process id) {
+    return Result.success(processService.removeById(id), ResultCode.SUCCESS_DELETE_DATA);
   }
 }
